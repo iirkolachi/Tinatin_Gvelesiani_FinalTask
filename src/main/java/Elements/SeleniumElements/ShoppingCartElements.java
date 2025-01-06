@@ -4,17 +4,11 @@ import org.openqa.selenium.By;
 
 public class ShoppingCartElements {
 
-    public static By button = By.xpath("//*[@id=\"content\"]/ul/li[1]/a[2]");
-
-    public static By basketBefore = By.xpath("//*[@id=\"wpmenucartli\"]/a/span[1]");
-
-    public static By basketAfter = By.xpath("//*[@id=\"wpmenucartli\"]/a/i");
-
-    public static By basket = By.xpath("//*[@id=\"wpmenucartli\"]/a");
-
-    public static By productInBasket = By.xpath("//*[@id=\"page-34\"]/div/div[1]/form/table/tbody/tr[1]/td[3]/a");
-
-    public static By remove = By.xpath("//*[@id=\"page-34\"]/div/div[1]/form/table/tbody/tr[1]/td[1]/a");
-
-    public static By emptyBasket = By.xpath("//*[@id=\"page-34\"]/div/div[2]/p[1]");
+    public static By button = By.xpath("//*[@id='content']/ul/li[1]/a[@href='/product-category/javascript/?add-to-cart=170']");
+    public static By basketBefore = By.xpath("//*[@id='wpmenucartli']/a/span[1]");
+    public static By basketAfter = By.xpath("//*[@id='wpmenucartli']/a//span[@class='amount']");
+            //"//*[@id='wpmenucartli']/a/i");
+    public static By productInBasket = By.xpath("//table[@class='shop_table shop_table_responsive cart']");
+    public static By remove = By.xpath("//a[@class='remove']");
+    public static By emptyBasket = By.xpath("//p[@class='cart-empty']");
 }

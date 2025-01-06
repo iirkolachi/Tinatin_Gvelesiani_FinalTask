@@ -7,7 +7,8 @@ public class CouponElements {
     public static By returnButton = By.xpath("//*[@class='button wc-backward']");
     public static By html5forms = By.xpath("//*[@href='/shop/?add-to-cart=181']");
     public static By seleniumRuby = By.xpath("//*[@href='/shop/?add-to-cart=160']");
-    public static By basket = By.xpath("//*[@class='cartcontents']");
+    public static By basket1 = By.xpath("//span[@class='cartcontents' and text()='1 item']");
+    public static By basket = By.xpath("//span[@class='cartcontents' and text()='2 items']");
     public static By couponInput = By.id("coupon_code");
     public static By applyButton = By.xpath("//*[@value='Apply Coupon']");
     public static By checkCoupon = By.xpath("//*[@class='cart-discount coupon-krishnasakinala']");

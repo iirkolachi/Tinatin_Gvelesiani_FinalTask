@@ -1,10 +1,10 @@
 package SeleniumSteps;
 
 import Elements.SeleniumElements.CouponElements;
-import Elements.SeleniumElements.OrderElements;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import java.time.Duration;
@@ -26,24 +26,29 @@ public class CouponSteps extends CouponElements {
         returnButton.click();
         return this;
     }
-    public CouponSteps chooseNewBooks() throws InterruptedException {
+    public CouponSteps chooseNewBooks() {
         WebElement html5forms = driver.findElement(CouponElements.html5forms);
-        jsExecutor.executeScript("arguments[0].click();",html5forms);
-        Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(CouponElements.html5forms));
+        jsExecutor.executeScript("arguments[0].click();", html5forms);
 
-        WebElement seleniumRuby = driver.findElement(CouponElements.seleniumRuby);
-        jsExecutor.executeScript("arguments[0].click();",seleniumRuby);
-        Thread.sleep(2000);
+        WebElement basket1 = driver.findElement(CouponElements.basket1);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(CouponElements.basket1));
+        if(basket1.isDisplayed()) {
+            WebElement seleniumRuby = driver.findElement(CouponElements.seleniumRuby);
+            wait.until(ExpectedConditions.elementToBeClickable(CouponElements.seleniumRuby));
+            jsExecutor.executeScript("arguments[0].click();", seleniumRuby);
+        }
         return this;
     }
-    public CouponSteps openCart() throws InterruptedException {
+    public CouponSteps openCart() {
         WebElement basket = driver.findElement(CouponElements.basket);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(CouponElements.basket));
         basket.click();
-        Thread.sleep(2000);
         return this;
     }
     public CouponSteps addCoupon() {
         WebElement couponInput = driver.findElement(CouponElements.couponInput);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(CouponElements.couponInput));
         couponInput.sendKeys("krishnasakinala");
 
         WebElement applyButton = driver.findElement(CouponElements.applyButton);
@@ -56,15 +61,15 @@ public class CouponSteps extends CouponElements {
         System.out.println("Coupon is applied.");
         return this;
     }
-    public CouponSteps removeCoupon() throws InterruptedException {
+    public CouponSteps removeCoupon() {
         WebElement removeCoupon = driver.findElement(CouponElements.removeCoupon);
         jsExecutor.executeScript("arguments[0].click();", removeCoupon);
-        Thread.sleep(2000);
         System.out.println("Coupon is deleted.");
         return this;
     }
     public CouponSteps checkAfterRemove() {
         WebElement afterRemove = driver.findElement(CouponElements.afterRemove);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(CouponElements.afterRemove));
         if(!afterRemove.getText().contains("krishnasakinala")) {
             System.out.println("Coupon has been removed.");
         }
@@ -85,7 +90,7 @@ public class CouponSteps extends CouponElements {
         return this;
     }
     public CouponSteps clickCheckout() {
-        WebElement checkoutButton = driver.findElement(OrderElements.checkoutButton);
+        WebElement checkoutButton = driver.findElement(CouponElements.checkoutButton);
         jsExecutor.executeScript("arguments[0].click();", checkoutButton);
         return this;
     }

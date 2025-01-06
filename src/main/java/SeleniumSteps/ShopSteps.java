@@ -1,6 +1,7 @@
 package SeleniumSteps;
 
 import Elements.SeleniumElements.ShopElements;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,10 +13,12 @@ public class ShopSteps extends ShopElements {
 
     WebDriver driver;
     WebDriverWait wait;
+    JavascriptExecutor jsExecutor;
 
     public ShopSteps(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.jsExecutor = (JavascriptExecutor) driver;
     }
 
     public ShopSteps clickShop() {
@@ -27,7 +30,7 @@ public class ShopSteps extends ShopElements {
 
     public ShopSteps orderBy() {
         WebElement filter = driver.findElement(ShopElements.sortingButton);
-        filter.click();
+        jsExecutor.executeScript("arguments[0].click();", filter);
         return this;
     }
 

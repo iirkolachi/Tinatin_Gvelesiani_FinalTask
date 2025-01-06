@@ -14,14 +14,13 @@ public class SeleniumTest extends SeleniumSetUp {
                 .clickRegister();
     }
     @Test (priority = 2)
-    public void shopTest() throws InterruptedException {
+    public void shopTest() {
         ShopSteps shopsteps = new ShopSteps(driver);
 
         shopsteps.clickShop()
                 .orderBy()
                 .lowToHigh()
                 .checkOrder();
-        Thread.sleep(2000);
     }
     @Test (priority = 3)
     public void javaScriptTest() {
@@ -37,13 +36,12 @@ public class SeleniumTest extends SeleniumSetUp {
 
         cartsteps.clickAdd()
                 .checkBasket()
-                .openBasket()
                 .checkProduct()
                 .removeProduct()
                 .checkBasketAfterRemove();
     }
     @Test (priority = 5)
-    public void couponTest() throws InterruptedException {
+    public void couponTest() {
         CouponSteps couponsteps = new CouponSteps(driver);
 
         couponsteps.returnToShop()
@@ -60,8 +58,22 @@ public class SeleniumTest extends SeleniumSetUp {
     @Test (priority = 6)
     public void orderTest() {
         OrderSteps ordersteps = new OrderSteps(driver);
-        driver.get("https://practice.automationtesting.in/checkout/");
 
-        ordersteps.billingDetails();
+        ordersteps.billingDetails()
+                .checkOrderInfo()
+                .clickMyAccount()
+                .login()
+                .clickOrders()
+                .checkOrder();
+    }
+    @Test (priority = 7)
+    public void changePassTest() {
+        ChangePassSteps changepasssteps = new ChangePassSteps(driver);
+
+        changepasssteps.clickAccountDetails()
+                .changeData()
+                .logout()
+                .loginWithNewData()
+                .checkLogin();
     }
 }
