@@ -1,4 +1,4 @@
-package SeleniumSteps;
+package Steps.SeleniumSteps;
 
 import Elements.SeleniumElements.OrderElements;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,14 +22,12 @@ public class OrderSteps extends OrderElements {
     }
 
     public OrderSteps billingDetails() {
+
         WebElement firstnameInput = driver.findElement(OrderElements.firstnameInput);
         firstnameInput.sendKeys("Tinatin");
 
         WebElement lastnameInput = driver.findElement(OrderElements.lastnameInput);
         lastnameInput.sendKeys("Gvelesiani");
-
-        WebElement emailInput = driver.findElement(OrderElements.emailInput);
-        emailInput.sendKeys("tinatingvelesiani@credo.ge");
 
         WebElement phoneInput = driver.findElement(OrderElements.phoneInput);
         phoneInput.sendKeys("1010101010");
@@ -48,6 +46,7 @@ public class OrderSteps extends OrderElements {
 
         WebElement orderButton = driver.findElement(OrderElements.orderButton);
         jsExecutor.executeScript("arguments[0].click();", orderButton);
+
         return this;
     }
     public OrderSteps checkOrderInfo() {
@@ -73,17 +72,6 @@ public class OrderSteps extends OrderElements {
     public OrderSteps clickMyAccount() {
         WebElement myAccount = driver.findElement(OrderElements.myAccount);
         myAccount.click();
-        return this;
-    }
-    public OrderSteps login() {
-        WebElement username = driver.findElement(OrderElements.username);
-        username.sendKeys("tinatingvelesiani@credo.ge");
-
-        WebElement pass = driver.findElement(OrderElements.pass);
-        pass.sendKeys("Selenium123!");
-
-        WebElement loginButton = driver.findElement(OrderElements.loginButton);
-        loginButton.click();
         return this;
     }
     public OrderSteps clickOrders() {

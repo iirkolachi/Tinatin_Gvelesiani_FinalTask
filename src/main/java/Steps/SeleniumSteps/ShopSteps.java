@@ -1,4 +1,4 @@
-package SeleniumSteps;
+package Steps.SeleniumSteps;
 
 import Elements.SeleniumElements.ShopElements;
 import org.openqa.selenium.JavascriptExecutor;

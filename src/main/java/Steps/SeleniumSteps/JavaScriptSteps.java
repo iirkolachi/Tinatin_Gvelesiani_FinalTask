@@ -1,8 +1,9 @@
-package SeleniumSteps;
+package Steps.SeleniumSteps;
 
 import Elements.SeleniumElements.JavaScriptElements;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import java.time.Duration;
@@ -20,8 +21,8 @@ public class JavaScriptSteps extends JavaScriptElements {
     }
 
     public JavaScriptSteps clickJavaScript() {
-        WebDriverWait explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement javascript = explicitWait.until(webDriver -> webDriver.findElement(JavaScriptElements.javaScript));
+        WebElement javascript = driver.findElement(JavaScriptElements.javaScript);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(JavaScriptElements.javaScript));
         javascript.click();
         return this;
     }

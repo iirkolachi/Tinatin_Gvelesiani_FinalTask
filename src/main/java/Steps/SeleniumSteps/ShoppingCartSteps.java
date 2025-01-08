@@ -1,4 +1,4 @@
-package SeleniumSteps;
+package Steps.SeleniumSteps;
 
 import Elements.SeleniumElements.ShoppingCartElements;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,10 +21,10 @@ public class ShoppingCartSteps extends ShoppingCartElements {
         this.jsExecutor = (JavascriptExecutor) driver;
     }
 
-    public ShoppingCartSteps clickAdd() throws InterruptedException {
+    public ShoppingCartSteps clickAdd() {
         WebElement button = driver.findElement(ShoppingCartElements.button);
         jsExecutor.executeScript("arguments[0].click();", button);
-        Thread.sleep(2000);
+        driver.navigate().refresh();
         return this;
     }
     public ShoppingCartSteps checkBasket() {

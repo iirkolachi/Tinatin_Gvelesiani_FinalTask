@@ -1,6 +1,7 @@
-package SeleniumSteps;
+package Steps.SeleniumSteps;
 
 import Elements.SeleniumElements.ChangePassElements;
+import Elements.SeleniumElements.OrderElements;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,10 +39,10 @@ public class ChangePassSteps extends ChangePassElements {
         currentPass.sendKeys("Selenium123!");
 
         WebElement newPass = driver.findElement(ChangePassElements.newPass);
-        newPass.sendKeys("Selenide123!");
+        newPass.sendKeys("Selenide1234@!");
 
         WebElement confirmNewPass = driver.findElement(ChangePassElements.confirmNewPass);
-        confirmNewPass.sendKeys("Selenide123!");
+        confirmNewPass.sendKeys("Selenide1234@!");
 
         WebElement saveChanges = driver.findElement(ChangePassElements.saveChanges);
         jsExecutor.executeScript("arguments[0].click();", saveChanges);
@@ -54,20 +55,23 @@ public class ChangePassSteps extends ChangePassElements {
         return this;
     }
     public ChangePassSteps loginWithNewData() {
+        String uniqueEmail = LogInSteps.uniqueEmail;
+
         WebElement username = driver.findElement(ChangePassElements.username);
-        username.sendKeys("tinatingvelesiani@credo.ge");
+        username.sendKeys(uniqueEmail);
 
         WebElement pass = driver.findElement(ChangePassElements.pass);
-        pass.sendKeys("Selenium123!");
+        pass.sendKeys("Selenide1234@!");
 
         WebElement loginButton = driver.findElement(ChangePassElements.loginButton);
         loginButton.click();
         return this;
     }
     public ChangePassSteps checkLogin() {
-        WebElement myName = driver.findElement(ChangePassElements.myName);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(ChangePassElements.myName));
-        Assert.assertTrue(myName.isDisplayed());
+        WebElement Orders = wait.until(ExpectedConditions.visibilityOfElementLocated(OrderElements.orders));
+        WebElement Logout = wait.until(ExpectedConditions.visibilityOfElementLocated(ChangePassElements.logout));
+
+        Assert.assertTrue(Orders.isDisplayed() && Logout.isDisplayed());
         return this;
     }
 }

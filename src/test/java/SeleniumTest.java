@@ -1,4 +1,4 @@
-import SeleniumSteps.*;
+import Steps.SeleniumSteps.*;
 import Utils.SeleniumSetUp;
 import org.testng.annotations.Test;
 
@@ -10,8 +10,7 @@ public class SeleniumTest extends SeleniumSetUp {
 
         loginsteps.openWebsite()
                 .setEmail()
-                .setPass()
-                .clickRegister();
+                .setPass();
     }
     @Test (priority = 2)
     public void shopTest() {
@@ -31,7 +30,7 @@ public class SeleniumTest extends SeleniumSetUp {
                 .checkBooks();
     }
     @Test (priority = 4)
-    public void addToCartTest() throws InterruptedException {
+    public void addToCartTest() {
         ShoppingCartSteps cartsteps = new ShoppingCartSteps(driver);
 
         cartsteps.clickAdd()
@@ -62,7 +61,6 @@ public class SeleniumTest extends SeleniumSetUp {
         ordersteps.billingDetails()
                 .checkOrderInfo()
                 .clickMyAccount()
-                .login()
                 .clickOrders()
                 .checkOrder();
     }

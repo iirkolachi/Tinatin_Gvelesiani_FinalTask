@@ -1,4 +1,4 @@
-package SeleniumSteps;
+package Steps.SeleniumSteps;
 
 import Elements.SeleniumElements.CouponElements;
 import org.openqa.selenium.JavascriptExecutor;
@@ -33,6 +33,7 @@ public class CouponSteps extends CouponElements {
 
         WebElement basket1 = driver.findElement(CouponElements.basket1);
         wait.until(ExpectedConditions.visibilityOfElementLocated(CouponElements.basket1));
+
         if(basket1.isDisplayed()) {
             WebElement seleniumRuby = driver.findElement(CouponElements.seleniumRuby);
             wait.until(ExpectedConditions.elementToBeClickable(CouponElements.seleniumRuby));

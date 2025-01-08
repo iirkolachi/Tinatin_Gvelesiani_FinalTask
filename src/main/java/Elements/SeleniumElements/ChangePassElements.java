@@ -15,5 +15,4 @@ public class ChangePassElements {
     public static By username = By.id("username");
     public static By pass = By.id("password");
     public static By loginButton = By.xpath("//*[@id='customer_login']/div[1]/form/p[3]/input[3]");
-    public static By myName = By.xpath("//*[@id='page-36']/div/div[1]/div/p[1]/strong[text()='tinatingvelesiani']");
 }
