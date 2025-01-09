@@ -2,11 +2,17 @@ package Steps.SelenideSteps;
 
 import Elements.SelenideElements.ChooseHotelElements;
 import com.codeborne.selenide.*;
+import org.openqa.selenium.NoSuchElementException;
+import org.testng.Assert;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChooseHotelSteps extends ChooseHotelElements {
+
+    public List<Double> prices;
 
     public ChooseHotelSteps orderPrices() throws InterruptedException {
         orderByDesc.shouldBe(Condition.visible).click();
@@ -30,57 +36,33 @@ public class ChooseHotelSteps extends ChooseHotelElements {
         return this;
     }
     public ChooseHotelSteps checkPrices() {
-        List<Double> orderedPrices = new ArrayList<>();
-        for (SelenideElement element : prices) {
-            String text = element.getText().trim();
-            if (!text.isEmpty()) {
-                text = text.replaceAll("[^0-9]", "");
-                if (!text.isEmpty()) {
-                    try {
-                        orderedPrices.add(Double.parseDouble(text));
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid price format: " + text);
-                    }
-                }
-            }
-        }
-        boolean isSorted = true;
-        for (int i = 0; i < orderedPrices.size() - 1; i++) {
-            if (orderedPrices.get(i) > orderedPrices.get(i + 1)) {
-                isSorted = false;
-                break;
-            }
-        }
-        if (isSorted) {
-            System.out.println("The prices are sorted from low to high.");
-        } else {
-            System.out.println("The prices are not sorted from low to high.");
-        }
-
-        return this;
-    }
-    public ChooseHotelSteps takeMaxValue() {
-        List<SelenideElement> sortedPrices = prices.stream()
-                .sorted(Comparator.comparingDouble(e -> Double.parseDouble(e.getText().replaceAll("[^\\d.]", ""))))
+         prices = pricesUpdated.stream()
+                .map(element -> Double.parseDouble(element.parent().parent().getAttribute("data-price")))
                 .toList();
 
-        if (!sortedPrices.isEmpty()) {
-            SelenideElement maxPriceElement = sortedPrices.getLast();
-            System.out.println("Maximum price: " + maxPriceElement.getText());
-        } else {
-            System.out.println("No prices found.");
-        }
+        boolean isDescending = prices.stream()
+                .sorted((a, b) -> Double.compare(b, a))
+                .toList()
+                .equals(prices);
+
+        Assert.assertTrue(isDescending);
+        System.out.println("Are prices in descending order? " + isDescending);
+        return this;
+    }
+
+
+    public ChooseHotelSteps takeMaxValue() {
+        double maxPrice = prices.stream().max(Double::compare).orElseThrow();
+        System.out.println("Maximum price: " + maxPrice);
         return this;
     }
     public ChooseHotelSteps takeMaxValueHotel() {
-        List<String> pricesUnordered = prices.texts();
-        List<Double> pricesDouble = pricesUnordered.stream()
-                .map(text -> Double.parseDouble(text.replaceAll("[^\\d.]", "")))
-                .toList();
+        SelenideElement maxPriceElement = pricesUpdated.stream()
+                .max(Comparator.comparingDouble(element -> Double.parseDouble(element.parent().parent().getAttribute("data-price"))))
+                .orElseThrow(() -> new NoSuchElementException("No prices found"));
 
-        Double maxPrice = pricesDouble.stream().max(Double::compareTo).orElse(0.00);
-        int maxPriceIndex = pricesDouble.indexOf(maxPrice);
-        Selenide.executeJavaScript("arguments[0].click();",prices.get(maxPriceIndex).parent().parent().find("a"));
+        System.out.println("Clicking on element with maximum price: " + maxPriceElement.parent().parent().getAttribute("data-price"));
+        maxPriceElement.parent().parent().parent().parent().find("a").scrollTo().click(ClickOptions.usingJavaScript());
         return this;
     }
 }

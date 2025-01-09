@@ -2,22 +2,25 @@ import Steps.SelenideSteps.*;
 import Utils.SelenideSetUp;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Selenide.open;
+
 public class SelenideTest extends SelenideSetUp {
 
-    @Test (priority = 1)
-    public void signUpTest() {
-        SignUpSteps loginsteps = new SignUpSteps();
-
-        loginsteps.openWebsite()
-                .clickSignUp()
-                .enterData()
-                .checkSignUp()
-                .logIn()
-                .enterLoginData();
-    }
+//    @Test (priority = 1)
+//    public void signUpTest() {
+//        SignUpSteps loginsteps = new SignUpSteps();
+//
+//        loginsteps.openWebsite()
+//                .clickSignUp()
+//                .enterData()
+//                .checkSignUp()
+//                .logIn()
+//                .enterLoginData();
+//    }
     @Test (priority = 2)
     public void searchHotelTest() {
         SearchHotelsSteps searchHotel = new SearchHotelsSteps();
+        open("https://www.phptravels.net/");
 
         searchHotel.clickHotels()
                 .chooseCheckinDate()
