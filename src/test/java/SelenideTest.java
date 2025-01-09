@@ -2,8 +2,6 @@ import Steps.SelenideSteps.*;
 import Utils.SelenideSetUp;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Selenide.open;
-
 public class SelenideTest extends SelenideSetUp {
 
     @Test (priority = 1)

@@ -7,7 +7,11 @@ import static com.codeborne.selenide.Selenide.open;
 public class UploadFileSteps extends UploadFileElements {
 
     public UploadFileSteps downloadFile() {
-        Selenide.executeJavaScript("arguments[0].click();", download);
+        if(download.isDisplayed()) {
+            Selenide.executeJavaScript("arguments[0].click();", download);
+        } else {
+            Selenide.closeWebDriver();
+        }
         return this;
     }
     public UploadFileSteps uploadFile() {
