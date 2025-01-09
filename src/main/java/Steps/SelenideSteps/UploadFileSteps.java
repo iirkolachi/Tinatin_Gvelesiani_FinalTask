@@ -8,7 +8,7 @@ public class UploadFileSteps extends UploadFileElements {
 
     public UploadFileSteps downloadFile() {
         if(download.isDisplayed()) {
-            Selenide.executeJavaScript("arguments[0].click();", download);
+            download.scrollTo().click();
         } else {
             Selenide.closeWebDriver();
         }
